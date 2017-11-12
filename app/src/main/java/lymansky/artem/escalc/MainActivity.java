@@ -8,21 +8,21 @@ import android.os.Bundle;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    private DrawerLayout mDrawerLayout;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        MainActivityFragment mainViewFragment = new MainActivityFragment();
-        fragmentTransaction.add(R.id.main_activity_fragment_holder, mainViewFragment);
-        fragmentTransaction.commit();
-    }
+  
+  private DrawerLayout mDrawerLayout;
+  
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    
+    MainActivityFragment mainViewFragment = new MainActivityFragment();
+    fragmentTransaction.add(R.id.main_activity_fragment_holder, mainViewFragment);
+    fragmentTransaction.commit();
+  }
 }

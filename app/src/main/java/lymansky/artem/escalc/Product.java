@@ -7,48 +7,48 @@ import java.util.ArrayList;
  */
 
 public class Product {
-
-    private String name;
-    private double price;
-    private double number;
-    private double total;
-    private boolean isIncluded;
-
-    private static ArrayList<Product> productSet;
-
-    public static ArrayList<Product> getProductSet() {
-        if(productSet == null) {
-            productSet = new ArrayList<>();
-        }
-        return productSet;
+  
+  private String name;
+  private double price;
+  private double number;
+  private double total;
+  private boolean isIncluded;
+  
+  private static ArrayList<Product> productSet;
+  
+  public static ArrayList<Product> getProductSet() {
+    if (productSet == null) {
+      productSet = new ArrayList<>();
     }
-
-    public Product(String name, double price, double number, boolean isIncluded) {
-        this.name = name;
-        this.price = price;
-        this.number = number;
-        this.isIncluded = isIncluded;
-        total = price * number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public double getNumber() {
-        return number;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public boolean getIsIncluded() {
-        return isIncluded;
-    }
-
+    return productSet;
+  }
+  
+  public Product(String name, double price, double number, boolean isIncluded) {
+    this.name = name;
+    this.price = price;
+    this.number = number;
+    this.isIncluded = isIncluded;
+    total = price * number;
+  }
+  
+  public String getName() {
+    return name;
+  }
+  
+  public double getPrice() {
+    return price;
+  }
+  
+  public double getNumber() {
+    return number;
+  }
+  
+  public double getTotal() {
+    return total;
+  }
+  
+  public boolean getIsIncluded() {
+    return isIncluded;
+  }
+  
 }

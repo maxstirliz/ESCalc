@@ -81,7 +81,7 @@
         android:text="ADD"
         android:textSize="24dp"
         android:layout_marginBottom="4dp"
-        android:onClick="onClickAddToList"/>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,6 +104,6 @@
         android:text="CLEAR INPUT"
         android:textSize="24dp"
         android:background="@android:color/holo_blue_light"
-        android:onClick="onClickClearInput"/>
+        />
 
 </LinearLayout>
