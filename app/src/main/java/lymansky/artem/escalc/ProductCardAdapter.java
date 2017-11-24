@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -19,10 +18,12 @@ import java.util.ArrayList;
 
 public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.ProductViewHolder> {
   
-  private TextView mGrandTotal;
+  private TextView grandTotal;
+  private ArrayList<Product> productSet;
   
   public ProductCardAdapter(TextView grandTotal) {
-    mGrandTotal = grandTotal;
+    this.grandTotal = grandTotal;
+    productSet = Product.getProductSet();
   }
   
   
@@ -34,69 +35,78 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
   
   @Override
   public void onBindViewHolder(ProductViewHolder holder, int position) {
-    Product product = Product.getProductSet().get(position);
-    holder.mIncluded.setChecked(product.getIsIncluded());
-    holder.mCardName.setText(product.getName());
-    holder.mCardTotal.setText(NumberFormat.getCurrencyInstance().format(product.getTotal()));
+    Product product = productSet.get(position);
+    holder.name.setText(product.getName());
+    holder.total.setText(NumberFormat.getCurrencyInstance().format(product.getTotal()));
+    holder.isIncluded.setChecked(product.getIsIncluded());
   }
   
   @Override
   public int getItemCount() {
-    return Product.getProductSet().size();
+    return productSet.size();
   }
-
+  
+  private void setGrandTotal() {
+    double value = 0;
+    for (int i = 0; i < productSet.size(); i++) {
+      if (productSet.get(i).getIsIncluded()) {
+        value += productSet.get(i).getTotal();
+      }
+    }
+    grandTotal.setText(NumberFormat.getCurrencyInstance().format(value));
+  }
 
 //    INNER CLASS
   
-  public static class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+  public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     
-    private CheckBox mIncluded;
-    private TextView mCardName;
-    private TextView mCardTotal;
-    private AppCompatImageButton mCardButton;
+    private CheckBox isIncluded;
+    private TextView name;
+    private TextView total;
+    private AppCompatImageButton cross;
     private Context context;
     
     public ProductViewHolder(View itemView) {
       super(itemView);
-      mIncluded = itemView.findViewById(R.id.card_checkbox);
-      mCardName = itemView.findViewById(R.id.card_name);
-      mCardTotal = itemView.findViewById(R.id.card_price);
-      mCardButton = itemView.findViewById(R.id.card_image);
+      itemView.setOnClickListener(this);
+      
+      isIncluded = itemView.findViewById(R.id.card_checkbox);
+      isIncluded.setOnClickListener(this);
+      
+      name = itemView.findViewById(R.id.card_name);
+      
+      total = itemView.findViewById(R.id.card_price);
+      
+      cross = itemView.findViewById(R.id.card_image);
+      cross.setOnClickListener(this);
+      
       context = itemView.getContext();
-      itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          if (context instanceof MainActivity) {
-            Intent intent = new Intent(context, FullScreenListActivity.class);
-            context.startActivity(intent);
-          }
-        }
-      });
     }
     
     @Override
     public void onClick(View view) {
       switch (view.getId()) {
         case R.id.card_checkbox:
-          Product.getProductSet().get(getLayoutPosition());
-          TextView grand = view.findViewById(R.id.grand_total);
-          grand.setText(setGrandTotal(Product.getProductSet()));
+//          CheckBox cb = (CheckBox) view;
+//          productSet.get(getAdapterPosition()).setIsIncluded(cb.isChecked());
+          boolean isChecked = productSet.get(getAdapterPosition()).getIsIncluded();
+          productSet.get(getAdapterPosition()).setIsIncluded(!isChecked);
+          setGrandTotal();
           break;
-        
         case R.id.card_image:
-          Product.getProductSet().remove(getLayoutPosition());
-          //notifyItemRemoved ???
+          int position = getAdapterPosition();
+          productSet.remove(position);
+          setGrandTotal();
+          notifyItemRemoved(position);
+          notifyItemRangeChanged(position, productSet.size());
+          break;
+        case R.id.card_view:
+          if (context instanceof MainActivity) {
+            Intent intent = new Intent(context, FullScreenListActivity.class);
+            context.startActivity(intent);
+          }
+          break;
       }
-    }
-    
-    private String setGrandTotal(ArrayList<Product> set) {
-      double value = 0;
-      for (int i = 0; i < set.size(); i++) {
-        if (set.get(i).getIsIncluded()) {
-          value += set.get(i).getTotal();
-        }
-      }
-      return NumberFormat.getCurrencyInstance().format(value);
     }
   }
 }

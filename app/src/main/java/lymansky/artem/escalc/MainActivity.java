@@ -6,7 +6,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-
 public class MainActivity extends AppCompatActivity {
   
   private DrawerLayout mDrawerLayout;
@@ -16,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     
-    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    mDrawerLayout = findViewById(R.id.drawer_layout);
     
     FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -24,7 +24,7 @@ public class Product {
   }
   
   public Product(String name, double price, double number, boolean isIncluded) {
-    this.name = name;
+    this.name = (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()).trim();
     this.price = price;
     this.number = number;
     this.isIncluded = isIncluded;
@@ -49,6 +49,10 @@ public class Product {
   
   public boolean getIsIncluded() {
     return isIncluded;
+  }
+  
+  public void setIsIncluded(boolean include) {
+    isIncluded = include;
   }
   
 }
