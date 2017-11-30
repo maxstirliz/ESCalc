@@ -63,7 +63,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
     private CheckBox isIncluded;
     private TextView name;
     private TextView total;
-    private AppCompatImageButton cross;
+    private AppCompatImageButton delete;
     private Context context;
     
     public ProductViewHolder(View itemView) {
@@ -77,8 +77,8 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
       
       total = itemView.findViewById(R.id.card_price);
       
-      cross = itemView.findViewById(R.id.card_image);
-      cross.setOnClickListener(this);
+      delete = itemView.findViewById(R.id.delete_product);
+      delete.setOnClickListener(this);
       
       context = itemView.getContext();
     }
@@ -93,7 +93,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
           productSet.get(getAdapterPosition()).setIsIncluded(!isChecked);
           setGrandTotal();
           break;
-        case R.id.card_image:
+        case R.id.delete_product:
           int position = getAdapterPosition();
           productSet.remove(position);
           setGrandTotal();

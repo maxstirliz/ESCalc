@@ -30,6 +30,19 @@
             android:padding="10dp"
             android:layout_weight="1">
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/drawer_button">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/drawer_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product name"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/drawer_button"
                 android:text="ADD"
@@ -37,22 +50,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"/>
-            
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/drawer_button">
-
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Product name"/>
-
-            </android.support.design.widget.TextInputLayout>
 
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_drawer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#cccccc"
