@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">ESCalc</string>
+
+    <!--Activities-->
+    <string name="shopping_list">Shopping List</string>
+    <string name="shopping_cart">Shopping Cart</string>
+
+    <!--Main screen-->
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="number_quantity">Number/Quantity</string>
+    <string name="total">Total: </string>
+    <string name="grand_total">Grand Total: </string>
+
+    <!--Buttons-->
+    <string name="add">ADD</string>
+    <string name="clear_input">CLEAR INPUT</string>
+
+    <!--Menus-->
+    <string name="clear_list">Clear List</string>
+    <string name="clear_cart">Clear Cart</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+
+    <!--Toasts-->
+    <string name="empty_field_warning">Fill in both PRICE and NUMBER!</string>
+    <string name="wrang_number_format">Wrong number format!</string>
+
 </resources>

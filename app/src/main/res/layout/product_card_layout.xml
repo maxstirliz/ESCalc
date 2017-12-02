@@ -46,7 +46,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="4dp"
                 android:layout_toRightOf="@id/card_checkbox"
-                android:text="Price: " />
+                android:text="@string/total" />
 
             <TextView
                 android:id="@+id/card_price"
@@ -55,8 +55,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="4dp"
                 android:layout_marginStart="16dp"
-                android:layout_toRightOf="@id/total_price_label"
-                android:text="" />
+                android:layout_toRightOf="@id/total_price_label" />
 
             <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/delete_product"

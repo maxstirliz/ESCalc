@@ -23,7 +23,7 @@
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CheckText" />
+        android:text="" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/delete_item"
