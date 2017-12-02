@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
   
   private static final long ANIMATION_DURATION = 150L;
+  private static final String SPACE = " ";
   
   private Button addButton;
   private Button clearButton;
@@ -177,10 +178,10 @@ public class MainActivityFragment extends Fragment {
       String result = NumberFormat.getCurrencyInstance().format(price * number);
       String check = NumberFormat.getCurrencyInstance().format(0);
       if (!result.equals(check)) {
-        addButton.setText("ADD " + result);
+        addButton.setText(getString(R.string.add) + SPACE + result);
       }
     } catch (NumberFormatException e) {
-      Toast.makeText(getActivity(), "Incorrect number format", Toast.LENGTH_SHORT).show();
+      Toast.makeText(getActivity(), getString(R.string.wrang_number_format), Toast.LENGTH_SHORT).show();
     }
   }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
 
 //    INNER CLASS
   
-  public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+  public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     
     private CheckBox isIncluded;
     private TextView name;
@@ -87,8 +88,6 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
     public void onClick(View view) {
       switch (view.getId()) {
         case R.id.card_checkbox:
-//          CheckBox cb = (CheckBox) view;
-//          productSet.get(getAdapterPosition()).setIsIncluded(cb.isChecked());
           boolean isChecked = productSet.get(getAdapterPosition()).getIsIncluded();
           productSet.get(getAdapterPosition()).setIsIncluded(!isChecked);
           setGrandTotal();

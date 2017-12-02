@@ -3,14 +3,14 @@
     android:id="@+id/activity_main_fullscreen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="24dp"
-    android:paddingBottom="24dp"
+    android:background="#ffffff"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="#ffffff">
+    android:orientation="vertical"
+    android:paddingBottom="24dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="24dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,24 +21,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
             android:layout_marginLeft="6dp"
-            android:text="$0.00"/>
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/grand_total"
+            android:layout_toLeftOf="@id/grand_total_fullscreen"
+            android:text="@string/grand_total"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
-            android:text="Grand Total: "/>
+            android:textStyle="bold|italic" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_fullscreen"
-            android:scrollbars="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@+id/recycler_view_fullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
 </LinearLayout>
