@@ -7,52 +7,56 @@ import java.util.ArrayList;
  */
 
 public class Product {
-  
-  private String name;
-  private double price;
-  private double number;
-  private double total;
-  private boolean isIncluded;
-  
-  private static ArrayList<Product> productSet;
-  
-  public static ArrayList<Product> getProductSet() {
-    if (productSet == null) {
-      productSet = new ArrayList<>();
+
+    private String name;
+    private double price;
+    private double number;
+    private double total;
+    private boolean isIncluded;
+
+    private static ArrayList<Product> productSet;
+
+    public static ArrayList<Product> getProductSet() {
+        if (productSet == null) {
+            productSet = new ArrayList<>();
+        }
+        return productSet;
     }
-    return productSet;
-  }
-  
-  public Product(String name, double price, double number, boolean isIncluded) {
-    this.name = (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()).trim();
-    this.price = price;
-    this.number = number;
-    this.isIncluded = isIncluded;
-    total = price * number;
-  }
-  
-  public String getName() {
-    return name;
-  }
-  
-  public double getPrice() {
-    return price;
-  }
-  
-  public double getNumber() {
-    return number;
-  }
-  
-  public double getTotal() {
-    return total;
-  }
-  
-  public boolean getIsIncluded() {
-    return isIncluded;
-  }
-  
-  public void setIsIncluded(boolean include) {
-    isIncluded = include;
-  }
-  
+
+    public Product(String name, double price, double number, boolean isIncluded) {
+        this.name = (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()).trim();
+        this.price = price;
+        this.number = number;
+        this.isIncluded = isIncluded;
+        total = price * number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getNumber() {
+        return number;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public boolean getIsIncluded() {
+        return isIncluded;
+    }
+
+    public void setIsIncluded(boolean include) {
+        isIncluded = include;
+    }
+
 }

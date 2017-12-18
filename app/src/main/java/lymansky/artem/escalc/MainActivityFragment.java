@@ -25,163 +25,163 @@ import java.util.ArrayList;
  */
 
 public class MainActivityFragment extends Fragment {
-  
-  private static final long ANIMATION_DURATION = 150L;
-  private static final String SPACE = " ";
-  
-  private Button addButton;
-  private Button clearButton;
-  private TextInputEditText nameEdit;
-  private TextInputEditText priceEdit;
-  private TextInputEditText numberEdit;
-  private TextView grandTotal;
-  private ProductCardAdapter adapter;
-  private RecyclerView rv;
-  private ArrayList<Product> products;
-  private Toast toastEmptyField;
-  
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main, container, false);
-    
-//    Fields initializing
-    products = Product.getProductSet();
-    addButton = view.findViewById(R.id.add_button);
-    grandTotal = view.findViewById(R.id.grand_total);
-    adapter = new ProductCardAdapter(grandTotal);
-    clearButton = view.findViewById(R.id.clear_button);
-    nameEdit = view.findViewById(R.id.input_name);
-    priceEdit = view.findViewById(R.id.input_price);
-    numberEdit = view.findViewById(R.id.input_number);
-    
-    rv = view.findViewById(R.id.recycler_view);
-    rv.setHasFixedSize(true);
-    rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-    rv.setAdapter(adapter);
-    rv.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
-      @Override
-      public void onChildViewAttachedToWindow(View view) {
-        setGrandTotal();
-      }
 
-      @Override
-      public void onChildViewDetachedFromWindow(View view) {
-        setGrandTotal();
-      }
-    });
-    
-//    Animation settings
-    RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-    itemAnimator.setAddDuration(ANIMATION_DURATION);
-    itemAnimator.setRemoveDuration(ANIMATION_DURATION);
-    rv.setItemAnimator(itemAnimator);
-  
-    nameEdit.setSingleLine();
-    grandTotal.setSingleLine();
-    
-    priceEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-      @Override
-      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if(actionId == EditorInfo.IME_ACTION_DONE) {
-          calculate();
-        }
-        return false;
-      }
-    });
-    numberEdit.setImeOptions(EditorInfo.IME_ACTION_DONE);
-    numberEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-      @Override
-      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if(actionId == EditorInfo.IME_ACTION_DONE) {
-          calculate();
-        }
-        
-        return false;
-      }
-    });
-  
-    addButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick (View v) {
-        String name = nameEdit.getText().toString();
-        if(name.trim().equals("")) {
-          name = "Product";
-        }
-        try {
-          double price = priceEdit.getText().length() == 0 ? 0 :
-                  Double.parseDouble(priceEdit.getText().toString());
-          double number = numberEdit.getText().length() == 0 ? 0 :
-                  Double.parseDouble(numberEdit.getText().toString());
-          if(price == 0 || number == 0) {
-            if(toastEmptyField != null) {
-              toastEmptyField.cancel();
+    private static final long ANIMATION_DURATION = 150L;
+    private static final String SPACE = " ";
+
+    private Button addButton;
+    private Button clearButton;
+    private TextInputEditText nameEdit;
+    private TextInputEditText priceEdit;
+    private TextInputEditText numberEdit;
+    private TextView grandTotal;
+    private ProductCardAdapter adapter;
+    private RecyclerView rv;
+    private ArrayList<Product> products;
+    private Toast toastEmptyField;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+//    Fields initializing
+        products = Product.getProductSet();
+        addButton = view.findViewById(R.id.add_button);
+        grandTotal = view.findViewById(R.id.grand_total);
+        adapter = new ProductCardAdapter(grandTotal);
+        clearButton = view.findViewById(R.id.clear_button);
+        nameEdit = view.findViewById(R.id.input_name);
+        priceEdit = view.findViewById(R.id.input_price);
+        numberEdit = view.findViewById(R.id.input_number);
+
+        rv = view.findViewById(R.id.recycler_view);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv.setAdapter(adapter);
+        rv.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(View view) {
+                setGrandTotal();
             }
-            toastEmptyField = Toast.makeText(getActivity(), "At leas Price and Number fields must be full", Toast.LENGTH_SHORT);
-            toastEmptyField.show();
-            return;
-          }
-          Product.getProductSet().add(0, new Product(name, price, number, true));
-          clearInput();
-          setGrandTotal();
-        } catch (NumberFormatException e) {
-          e.printStackTrace();
+
+            @Override
+            public void onChildViewDetachedFromWindow(View view) {
+                setGrandTotal();
+            }
+        });
+
+//    Animation settings
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(ANIMATION_DURATION);
+        itemAnimator.setRemoveDuration(ANIMATION_DURATION);
+        rv.setItemAnimator(itemAnimator);
+
+        nameEdit.setSingleLine();
+        grandTotal.setSingleLine();
+
+        priceEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    calculate();
+                }
+                return false;
+            }
+        });
+        numberEdit.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        numberEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    calculate();
+                }
+
+                return false;
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEdit.getText().toString();
+                if (name.trim().equals("")) {
+                    name = getString(R.string.default_product_name);
+                }
+                try {
+                    double price = priceEdit.getText().length() == 0 ? 0 :
+                            Double.parseDouble(priceEdit.getText().toString());
+                    double number = numberEdit.getText().length() == 0 ? 0 :
+                            Double.parseDouble(numberEdit.getText().toString());
+                    if (price == 0 || number == 0) {
+                        if (toastEmptyField != null) {
+                            toastEmptyField.cancel();
+                        }
+                        toastEmptyField = Toast.makeText(getActivity(), getString(R.string.empty_field_warning), Toast.LENGTH_SHORT);
+                        toastEmptyField.show();
+                        return;
+                    }
+                    Product.getProductSet().add(0, new Product(name, price, number, true));
+                    clearInput();
+                    setGrandTotal();
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                adapter.notifyItemInserted(0);
+                rv.smoothScrollToPosition(0);
+                addButton.setText(getString(R.string.add));
+                nameEditFocus();
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearInput();
+                addButton.setText(getString(R.string.add));
+                nameEditFocus();
+            }
+        });
+
+        return view;
+    }
+
+    private void setGrandTotal() {
+        double value = 0;
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getIsIncluded()) {
+                value += products.get(i).getTotal();
+            }
         }
-        adapter.notifyItemInserted(0);
-        rv.smoothScrollToPosition(0);
-        addButton.setText("ADD");
-        nameEditFocus();
-      }
-    });
-    
-    clearButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view ) {
-        clearInput();
-        addButton.setText("ADD");
-        nameEditFocus();
-      }
-    });
-    
-    return view;
-  }
-  
-  private void setGrandTotal() {
-    double value = 0;
-    for (int i = 0; i < products.size(); i++) {
-      if(products.get(i).getIsIncluded()) {
-        value += products.get(i).getTotal();
-      }
+        grandTotal.setText(NumberFormat.getCurrencyInstance().format(value));
     }
-    grandTotal.setText(NumberFormat.getCurrencyInstance().format(value));
-  }
-  
-  private void clearInput() {
-    nameEdit.setText("");
-    priceEdit.setText("");
-    numberEdit.setText("");
-  }
-  
-  private void nameEditFocus() {
-    nameEdit.requestFocus();
-    InputMethodManager imm = (InputMethodManager) getActivity()
-            .getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.showSoftInput(nameEdit, InputMethodManager.SHOW_IMPLICIT);
-  }
-  
-  private void calculate() {
-    try {
-      double price = priceEdit.getText().length() == 0 ? 0 :
-              Double.parseDouble(priceEdit.getText().toString());
-      double number = numberEdit.getText().length() == 0 ? 0 :
-              Double.parseDouble(numberEdit.getText().toString());
-      String result = NumberFormat.getCurrencyInstance().format(price * number);
-      String check = NumberFormat.getCurrencyInstance().format(0);
-      if (!result.equals(check)) {
-        addButton.setText(getString(R.string.add) + SPACE + result);
-      }
-    } catch (NumberFormatException e) {
-      Toast.makeText(getActivity(), getString(R.string.wrang_number_format), Toast.LENGTH_SHORT).show();
+
+    private void clearInput() {
+        nameEdit.setText("");
+        priceEdit.setText("");
+        numberEdit.setText("");
     }
-  }
+
+    private void nameEditFocus() {
+        nameEdit.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(nameEdit, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    private void calculate() {
+        try {
+            double price = priceEdit.getText().length() == 0 ? 0 :
+                    Double.parseDouble(priceEdit.getText().toString());
+            double number = numberEdit.getText().length() == 0 ? 0 :
+                    Double.parseDouble(numberEdit.getText().toString());
+            String result = NumberFormat.getCurrencyInstance().format(price * number);
+            String check = NumberFormat.getCurrencyInstance().format(0);
+            if (!result.equals(check)) {
+                addButton.setText(getString(R.string.add) + SPACE + result);
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), getString(R.string.wrong_number_format), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

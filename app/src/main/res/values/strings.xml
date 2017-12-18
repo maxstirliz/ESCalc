@@ -11,6 +11,7 @@
     <string name="number_quantity">Number/Quantity</string>
     <string name="total">Total: </string>
     <string name="grand_total">Grand Total: </string>
+    <string name="default_product_name">Product</string>
 
     <!--Buttons-->
     <string name="add">ADD</string>
@@ -24,6 +25,6 @@
 
     <!--Toasts-->
     <string name="empty_field_warning">Fill in both PRICE and NUMBER!</string>
-    <string name="wrang_number_format">Wrong number format!</string>
+    <string name="wrong_number_format">Wrong number format!</string>
 
 </resources>
